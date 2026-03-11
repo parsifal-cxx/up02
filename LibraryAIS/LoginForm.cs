@@ -7,11 +7,20 @@ namespace LibraryAIS
 {
     public partial class LoginForm : Form
     {
-        private int failedAttempts = 0; // Счетчик неудачных попыток
+        private int failedAttempts = 0;
+        private CaptchaGenerator captchaGenerator; // Добавлен генератор CAPTCHA
 
         public LoginForm()
         {
             InitializeComponent();
+            captchaGenerator = new CaptchaGenerator();
+
+            // Скрываем CAPTCHA элементы при запуске (пока не нужны)
+            lblCaptcha.Visible = false;
+            picCaptcha.Visible = false;
+            txtCaptcha.Visible = false;
+            btnRefreshCaptcha.Visible = false;
+            lblBlockTimer.Visible = false;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -95,6 +104,16 @@ namespace LibraryAIS
                     txtPassword.Focus();
                 }
             }
+        }
+
+        private void btnRefreshCaptcha_Click(object sender, EventArgs e)
+        {
+            // Пока пустой обработчик - реализация в следующем Issue
+        }
+
+        private void timerBlock_Tick(object sender, EventArgs e)
+        {
+            // Пока пустой обработчик - реализация в Issue #3
         }
 
         private void btnExit_Click(object sender, EventArgs e)
